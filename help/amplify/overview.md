@@ -1,10 +1,10 @@
 ---
-title: 증폭 개요
+title: Amplify 개요
 description: Amplify의 개요 페이지입니다.
 source-git-commit: a389631a2baa639496f4168a164aa3461157f5ff
-workflow-type: tm+mt
+workflow-type: ht
 source-wordcount: '17'
-ht-degree: 5%
+ht-degree: 100%
 
 ---
 

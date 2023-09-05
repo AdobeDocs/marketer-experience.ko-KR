@@ -1,14 +1,14 @@
 ---
-title: 마케터 경험
-description: 다음의 개요 페이지입니다. [!DNL Marketer Experience].
+title: Marketer Experience
+description: ' [!DNL Marketer Experience]의 개요 페이지입니다.'
 source-git-commit: a3eef4938f645e4db1db335aa36d988c93921f18
-workflow-type: tm+mt
+workflow-type: ht
 source-wordcount: '15'
-ht-degree: 0%
+ht-degree: 100%
 
 ---
 
 
-# 마케터 경험 개요
+# Marketer Experience 개요
 
-시작: [!DNL Marketer Experience] 개요.
+[!DNL Marketer Experience] 개요를 시작합니다.

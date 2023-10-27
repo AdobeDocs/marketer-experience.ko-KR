@@ -3,9 +3,9 @@ title: 단일 이벤트
 description: 여정 유효성 검사의 '[!UICONTROL 단일 이벤트]' 유형을 시뮬레이션하기 위한 안내 페이지입니다.
 exl-id: 314f967c-e10f-4832-bdba-901424dc2eeb
 source-git-commit: 194667c26ed002be166ab91cc778594dc1f09238
-workflow-type: tm+mt
+workflow-type: ht
 source-wordcount: '889'
-ht-degree: 37%
+ht-degree: 100%
 
 ---
 
@@ -33,26 +33,26 @@ ht-degree: 37%
 
 >[!TIP]
 >
->터미널을 사용하여 컬을 실행하는 경우 컬을 실행하기 전에 변수 값을 설정할 수 있으므로 개별 컬에서 해당 값을 바꿀 필요가 없습니다.
->예: 다음을 설정하는 경우 `ORG_ID=************@AdobeOrg`, 셸은 모든 발생 항목을 자동으로 대체합니다. `$ORG_ID` 값을 사용하여 수정 없이 아래 컬을 복사, 붙여넣기 및 실행할 수 있습니다.
+>터미널을 사용하여 cURL을 실행하는 경우 cURL을 실행하기 전에 변수 값을 설정하여 개별 cURL에서 해당 값을 바꿀 필요가 없도록 할 수 있습니다.
+>예를 들어 `ORG_ID=************@AdobeOrg`과 같이 설정하면 셸에서 모든 `$ORG_ID` 발생이 값으로 자동 대체되므로, cURL을 수정하지 않고도 복사하고, 붙여넣고, 실행할 수 있습니다.
 >
-> 이 문서 전체에서 사용되는 변수는 다음과 같습니다
+> 이 문서 전체에서는 다음 변수가 사용됩니다.
 >
-> 액세스 토큰
+> ACCESS_TOKEN
 >
-> API 키
+> API_KEY
 >
 > ORG_ID
 >
-> 샌드박스 이름
+> SANDBOX_NAME
 >
 > PROFILE_SCHEMA_REF
 >
-> PROFILE_DATA_NAME
+> PROFILE_DATASET_NAME
 >
 > PROFILE_DATASET_ID
 >
-> 여정 ID
+> JOURNEY_ID
 >
 > PROFILE_BASE_CONNECTION_ID
 >
@@ -64,15 +64,15 @@ ht-degree: 37%
 >
 > CUSTOMER_MOBILE_NUMBER
 >
-> 고객 이름
+> CUSTOMER_FIRST_NAME
 >
 > CUSTOMER_LAST_NAME
 >
-> 이메일
+> EMAIL
 >
 > EVENT_SCHEMA_REF
 >
-> EVENT_DATA_NAME
+> EVENT_DATASET_NAME
 >
 > EVENT_DATASET_ID
 >
@@ -84,7 +84,7 @@ ht-degree: 37%
 >
 > EVENT_INLET_URL
 >
-> 타임스탬프
+> TIMESTAMP
 >
 > UNIQUE_EVENT_ID
 
@@ -114,7 +114,7 @@ ht-degree: 37%
       --header "Content-Type: application/json" 
       ```
 
-   1. 여정 게시에는 시간이 걸릴 수 있으므로 상태를 확인하기 위해 다음을 수행할 때까지 cURL 아래에서 실행 `response.status` 은(는) `SUCCESS`: 여정 게시에 시간이 걸리는 경우 10~15초 정도 기다려야 합니다.
+   1. 여정 게시에는 시간이 소요될 수 있으므로 상태를 확인하려면 아래 cURL을 실행하고 `response.status`가 `SUCCESS`가 될 때까지 10~15초 정도 기다려야 합니다.
 
       ```bash
       curl --location "https://journey-private.adobe.io/authoring/jobs/$JOB_ID" \
@@ -129,9 +129,9 @@ ht-degree: 37%
 
 >[!TIP]
 >
->이메일 공급자가 + 개의 이메일을 지원하는 경우 를 추가하여 동일한 이메일 주소를 다시 사용할 수 있습니다 `+<variable>` 을 이메일에 포함시킵니다. 예: `usertest@email.com` 다음과 같이 재사용할 수 있습니다. `usertest+v1@email.com` 또는 `usertest+24jul@email.com`. 이를 통해 동일한 이메일 ID를 사용하면서 매번 새로운 프로필을 가질 수 있습니다.
+>이메일 제공업체가 플러스 이메일을 지원하는 경우 이메일에 `+<variable>`을 추가하여 동일한 이메일 주소를 재사용할 수 있습니다(예: `usertest@email.com`를 `usertest+v1@email.com` 또는 `usertest+24jul@email.com`로 재사용). 이를 통해 동일한 이메일 ID를 사용하면서 매번 새로운 프로필을 가질 수 있습니다.
 >
->P.S: 또한 이메일은 이메일 공급자가 지원해야 하는 구성 가능한 기능입니다. 테스트에서 사용하기 전에 이러한 주소에서 이메일을 받을 수 있는지 확인하십시오.
+>추신: 플러스 이메일은 이메일 제공업체의 지원이 필요한 구성 가능 기능입니다. 테스트에 사용하기 전에 해당 주소로 이메일을 받을 수 있는지 확인하십시오.
 
 1. 최초 사용자는 **[!DNL customer dataset]** 및 **[!DNL HTTP Streaming Inlet Connection]**&#x200B;을 만들어야 합니다.
 1. **[!DNL customer dataset]** 및 **[!DNL HTTP Streaming Inlet Connection]**&#x200B;을 이미 생성한 경우, `5`단계로 이동합니다.
@@ -166,9 +166,9 @@ ht-degree: 37%
    }'
    ```
 
-   응답은 다음과 같은 형식입니다 `"@/dataSets/<PROFILE_DATASET_ID>"`.
+   응답 포맷은 `"@/dataSets/<PROFILE_DATASET_ID>"`입니다.
 
-1. 만들기 **[!DNL HTTP Streaming Inlet Connection]** 를 참조하십시오.
+1. 다음 단계를 사용하여 **[!DNL HTTP Streaming Inlet Connection]**&#x200B;을 만듭니다.
    1. 기본 연결을 만듭니다.
 
       ```bash
@@ -194,7 +194,7 @@ ht-degree: 37%
       }'
       ```
 
-      응답에서 기본 연결 ID를 가져와 대신 사용 `PROFILE_BASE_CONNECTION_ID` 다음 cURL
+      응답에서 기본 연결을 가져와 다음 cURL에서 `PROFILE_BASE_CONNECTION_ID` 대신 사용합니다.
 
    1. 소스 연결을 만듭니다.
 
@@ -216,7 +216,7 @@ ht-degree: 37%
       }'
       ```
 
-      응답에서 소스 연결 ID를 가져와 대신 사용 `PROFILE_SOURCE_CONNECTION_ID`
+      응답에서 소스 연결 ID를 가져와 `PROFILE_SOURCE_CONNECTION_ID` 대신 사용합니다.
 
    1. 대상 연결을 만듭니다.
 
@@ -248,7 +248,7 @@ ht-degree: 37%
       }'
       ```
 
-      응답에서 대상 연결 ID를 가져와 대신 사용 `PROFILE_TARGET_CONNECTION_ID`
+      응답에서 대상 연결 ID를 가져와 `PROFILE_TARGET_CONNECTION_ID` 대신 사용합니다.
 
    1. 데이터 흐름을 만듭니다.
 
@@ -286,17 +286,17 @@ ht-degree: 37%
       --header "x-api-key: $API_KEY"
       ```
 
-      응답에서 inletUrl을 가져와 대신 사용 `PROFILE_INLET_URL`
+      응답에서 inletUrl을 가져와 `PROFILE_INLET_URL` 대신 사용합니다.
 
-1. 이 단계에서 사용자는 다음 값을 가져야 합니다. `PROFILE_DATASET_ID` 및 `PROFILE_INLET_URL`; 그렇지 않은 경우, 단계 를 참조하십시오. `3` 또는 `4` 각각.
-1. 고객을 수집하려면 사용자가 다음을 교체해야 합니다. `CUSTOMER_MOBILE_NUMBER`, `CUSTOMER_FIRST_NAME`, `CUSTOMER_LAST_NAME` 및 `EMAIL` (아래 cURL)
+1. 이 단계에서 사용자는 `PROFILE_DATASET_ID` 및 `PROFILE_INLET_URL` 값이 있어야 합니다. 해당 값이 없는 경우 `3`단계 또는 `4`단계를 각각 참조하십시오.
+1. 고객을 수집하려면 사용자는 아래 cURL의 `CUSTOMER_MOBILE_NUMBER`, `CUSTOMER_FIRST_NAME`, `CUSTOMER_LAST_NAME` 및 `EMAIL`을 바꿔야 합니다.
 
    1. `CUSTOMER_MOBILE_NUMBER`는 `+1 000-000-0000` 등과 같은 휴대폰 번호가 될 것입니다.
    1. `CUSTOMER_FIRST_NAME`은 사용자의 이름이 될 것입니다.
    1. `CUSTOMER_LAST_NAME`은 사용자의 성이 될 것입니다.
    1. `EMAIL`은 사용자의 이메일 주소가 될 것입니다. 이는 새로운 프로필을 수집할 수 있도록 고유한 이메일 ID를 사용해야 합니다.
 
-1. 마지막으로 curl을 실행하여 고객 프로필을 수집합니다. 업데이트 `body.xdmEntity.consents.marketing.preferred` 끝 `email`, `sms`, 또는 `push` 확인할 채널을 기반으로 합니다. 해당 항목도 설정 `val` 끝 `y`.
+1. 마지막으로 cURL을 실행하여 고객 프로필을 수집합니다. 확인하고자 하는 채널에 따라 `email`, `sms` 또는 `push`에 `body.xdmEntity.consents.marketing.preferred`를 업데이트합니다. 또한 해당하는 `val`을 `y`로 설정합니다.
 
    ```bash
    curl --location "$PROFILE_INLET_URL?synchronousValidation=true" \
@@ -389,9 +389,9 @@ ht-degree: 37%
    }'
    ```
 
-   응답은 다음과 같은 형식입니다 `"@/dataSets/<EVENT_DATASET_ID>"`
+   응답 포맷은 `"@/dataSets/<EVENT_DATASET_ID>"`입니다.
 
-1. 만들기 **[!DNL HTTP Streaming Inlet Connection for events]**  를 참조하십시오.
+1. 다음 단계를 사용하여 **[!DNL HTTP Streaming Inlet Connection for events]**를 만듭니다.
    <!-- TODO: Is the name unique? If so, we may need to generate and provide in variables.txt-->
    1. 기본 연결을 만듭니다.
 
@@ -418,7 +418,7 @@ ht-degree: 37%
       }'
       ```
 
-      응답에서 기본 연결 ID를 가져와 대신 사용 `EVENT_BASE_CONNECTION_ID`
+      응답에서 기본 연결 ID를 가져와 `EVENT_BASE_CONNECTION_ID` 대신 사용합니다.
 
    1. 소스 연결을 만듭니다.
 
@@ -440,7 +440,7 @@ ht-degree: 37%
       }'
       ```
 
-      응답에서 소스 연결 ID를 가져와 대신 사용 `EVENT_SOURCE_CONNECTION_ID`
+      응답에서 소스 연결 ID를 가져와 `EVENT_SOURCE_CONNECTION_ID` 대신 사용합니다.
 
    1. 대상 연결을 만듭니다.
 
@@ -472,7 +472,7 @@ ht-degree: 37%
       }'
       ```
 
-      응답에서 대상 연결 ID를 가져와 대신 사용 `EVENT_TARGET_CONNECTION_ID`
+      응답에서 대상 연결 ID를 가져와 `EVENT_TARGET_CONNECTION_ID` 대신 사용합니다.
 
    1. 데이터 흐름을 만듭니다.
 
@@ -510,14 +510,14 @@ ht-degree: 37%
        --header "Content-Type: application/json" 
    ```
 
-   응답에서 inletUrl을 가져와 대신 사용 `EVENT_INLET_URL`
+   응답에서 inletUrl을 가져와 `EVENT_INLET_URL` 대신 사용합니다.
 
-1. 이 단계에서 사용자는 다음 값을 가져야 합니다. `EVENT_DATASET_ID` 및 `EVENT_INLET_URL`; 그렇지 않은 경우, 단계 를 참조하십시오. `3` 또는 `4` 각각.
-1. 이벤트를 수집하려면 사용자가 시간 변수를 변경해야 합니다 `TIMESTAMP` (아래 cURL의 요청 본문).
+1. 이 단계에서 사용자는 `EVENT_DATASET_ID` 및 `EVENT_INLET_URL` 값이 있어야 합니다. 해당 값이 없는 경우 `3`단계 또는 `4`단계를 각각 참조하십시오.
+1. 이벤트를 수집하려면 사용자가 아래 cURL의 요청 본문에서 `TIMESTAMP`를 변경해야 합니다.
 
-   1. 바꾸기 `body.xdmEntity` (다운로드한 이벤트 json의 콘텐츠 포함)
-   1. `TIMESTAMP` 이벤트 발생 시간이 UTC 시간대로 타임스탬프 사용(예: ). `2023-09-05T23:57:00.071+00:00`.
-   1. 변수에 대한 고유 값 설정 `UNIQUE_EVENT_ID`.
+   1. `body.xdmEntity`를 다운로드된 이벤트 json 내용으로 바꿉니다.
+   1. `TIMESTAMP`는 타임스탬프를 사용하여 이벤트 발생 시간을 UTC 시간대로 표시합니다(예: `2023-09-05T23:57:00.071+00:00`).
+   1. 변수 `UNIQUE_EVENT_ID`에 고유 값을 설정합니다.
 
    ```bash
    curl --location "$EVENT_INLET_URL?synchronousValidation=true" \

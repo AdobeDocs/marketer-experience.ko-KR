@@ -3,8 +3,8 @@ title: 단일 이벤트
 description: 여정 유효성 검사의 '[!UICONTROL 단일 이벤트]' 유형을 시뮬레이션하기 위한 안내 페이지입니다.
 exl-id: 314f967c-e10f-4832-bdba-901424dc2eeb
 source-git-commit: 194667c26ed002be166ab91cc778594dc1f09238
-workflow-type: ht
-source-wordcount: '889'
+workflow-type: tm+mt
+source-wordcount: '839'
 ht-degree: 100%
 
 ---
